@@ -38,16 +38,18 @@
 @endsection
 
 @section('content')
-    <div class="row" id="stl_1">
+    <!--<div class="row" id="stl_1">
         <div class="col-md-12" id="stl_1_1">
             <h1>Envio Submetido!</h1>
             <p>Sua noticia foi submetida com sucesso!</p>
-            <!--<p><a class="btn btn-primary ntm-lg" href="{{ url('/') }}" role="button"></a></p>-->
         </div>
-    </div>
+    </div>-->
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <a href="{{ url('/news') }}" class="btn btn-danger btn-lg btn-block" style="margin-top: 10px; margin-bottom: 35%">Ver o post</a>
+        </div>
+        <div class="col-md-6">
             <a href="{{ url('/home') }}" class="btn btn-danger btn-lg btn-block" style="margin-top: 10px; margin-bottom: 35%">Voltar para a Home</a>
         </div>
     </div>

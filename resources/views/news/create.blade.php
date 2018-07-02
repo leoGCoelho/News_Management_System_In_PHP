@@ -1,6 +1,7 @@
 @extends('main')
 
 @section('title', 'Adicionar uma noticia')
+@section('stylesheets') {!! Html::style('css/parsley.css') !!} @endsection
 
 @section('style')
     <style>
@@ -42,7 +43,6 @@
         <div class="col-md-12" id="stl_1_1">
             <div class="jumbutron">
                 <h1>Adicionar uma noticia</h1>
-                <!--<p><a class="btn btn-primary ntm-lg" href="{{ url('/') }}" role="button"></a></p>-->
             </div>
         </div>
     </div>
@@ -50,13 +50,16 @@
     <div class="row">
         <div class="col-md-12">
             <hr>
-                {!! Form::open(['route' => 'news.store']) !!}
+                {!! Form::open(['route' => 'news.store', 'data-parsley-validate' => '']) !!}
                     {{ Form::label('titulo', 'Titulo:') }}
-                    {{ Form::text('titulo', null, ['class' => 'form-control'])}}
+                    {{ Form::text('titulo', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255'])}}
                     {{ Form::label('autor', 'Autor:') }}
-                    {{ Form::text('autor', null, ['class' => 'form-control'])}}
-                    {{ Form::textarea('conteudo', "Digite aqui", ['class' => 'form-control', 'style' => 'margin-top: 25px']) }}
-                    {{ Form::submit('Submeter', ['class' => 'btn btn-danger btn-lg btn-block', 'style' => 'margin-bottom: 5px']) }}
+                    {{ Form::text('autor', null, ['class' => 'form-control', 'required' => ''])}}
+                    {{ Form::label('autor', 'Digite aqui:') }}
+                    {{ Form::textarea('conteudo', null, ['class' => 'form-control', 'required' => '']) }}
+                    {{ Form::label('imagem', 'Anexar uma imagem (link da imagem):') }}
+                    {{ Form::text('imagem', null, ['class' => 'form-control'])}}
+                    {{ Form::submit('Submeter', ['class' => 'btn btn-danger btn-lg btn-block', 'style' => 'margin-top: 15px; margin-bottom: 5px']) }}
 
                 {!! Form::close() !!}
             </hr>
@@ -65,3 +68,4 @@
 
 
 @endsection
+@section('scrips') {!! Html::script('js/parsley.min.js') !!} @endsection

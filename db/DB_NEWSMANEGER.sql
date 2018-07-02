@@ -7,24 +7,6 @@ CREATE TABLE IF NOT EXISTS `NEWS` (
 	`titulo` varchar( 255 ) NOT NULL ,
 	`conteudo` text NOT NULL ,
 	`autor` varchar( 255 ) NOT NULL,
+	`imagem` varchar( 255 ),
 	PRIMARY KEY ( `id` )
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;)
-
-DROP TABLE IF EXISTS `CATEGORY`;
-CREATE TABLE IF NOT EXISTS `CATEGORY` (
-	`id` int( 11 ) NOT NULL AUTO_INCREMENT ,
-    `n_id` int( 11 ) NOT NULL,
-	`nome` varchar( 255 ) NOT NULL ,
-	PRIMARY KEY ( `id` ),
-	FOREIGN KEY ( `n_id` ) REFERENCES  `NEWS` ( `id` )
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `COMENTARY`;
-CREATE TABLE IF NOT EXISTS `COMENTARY` (
-	`id` int( 11 ) NOT NULL AUTO_INCREMENT ,
-	`n_id` int( 11 ) NOT NULL ,
-	`conteudo` text NOT NULL ,
-	`nome` varchar( 255 ) NOT NULL,
-	PRIMARY KEY ( `id` ),
-	FOREIGN KEY ( `n_id` ) REFERENCES  `NEWS` ( `id` )
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;

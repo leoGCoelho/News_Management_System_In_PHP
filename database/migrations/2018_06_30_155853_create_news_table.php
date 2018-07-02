@@ -18,6 +18,7 @@ class CreateNewsTable extends Migration
             $table->string('titulo')->defaut('Sem título');
             $table->string('autor')->defaut('Autor desconhecido');
             $table->text('conteudo');
+            $table->string('imagem')->nullable; // Sem imagem
             $table->timestamps();
         });
     }

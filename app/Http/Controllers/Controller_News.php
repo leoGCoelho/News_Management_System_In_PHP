@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 use App\News;
 
 class Controller_News extends Controller
@@ -15,7 +16,8 @@ class Controller_News extends Controller
      */
     public function index()
     {
-        //
+        $news_s = News::orderBy('id', 'desc')->paginate(10);
+        return view('news.index')->withNews($news_s);
     }
 
     /**
@@ -36,17 +38,21 @@ class Controller_News extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, array('titulo' => 'required|max:255', 'autor' => 'required|max:255', 'conteudo' => 'required')); // Validar o dado passado
+        $this->validate($request, array('titulo' => 'required|max:255', 'autor' => 'required|max:255', 'conteudo' => 'required', 'imagem' => 'required|max:255')); // Validar o dado passado
 
         // Armazenar o dado no db
         $news = new News;
         $news->titulo = $request->titulo;
         $news->autor = $request->autor;
         $news->conteudo = $request->conteudo;
+        $news->imagem = $request->imagem;
         $news->save();
 
+        Session::flash('success', 'Sua noticia foi enviada com sucesso!');
+
         //redirecionar para pagina de confirmação
-        return redirect('/success');
+        return redirect()->route('news.show', $news->id);
+        //return redirect('/success');
     }
 
     /**
@@ -57,7 +63,8 @@ class Controller_News extends Controller
      */
     public function show($id)
     {
-        //
+        $news = News::find($id);
+        return view('news.show')->withNews($news);
     }
 
     /**
@@ -91,6 +98,9 @@ class Controller_News extends Controller
      */
     public function destroy($id)
     {
-        //
+        $news = News::find($id);
+        $news->delete();
+        Session::flash('success', 'A postagem foi deletada dos nossos servidores com sucesso!');
+        return redirect('/home');
     }
 }

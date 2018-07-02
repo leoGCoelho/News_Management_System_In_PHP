@@ -9,6 +9,8 @@
         @include('layout._navBar')
         <!-- Corpo -->
         <div class="container">
+            @include('layout._msg')
+
             @yield('content')
 
             @include('layout._footer')
